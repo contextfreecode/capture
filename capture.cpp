@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 
+// template<typename F>
+// void repeat(int times, F&& act) {
+// void repeat(int times, void(*act)(int)) {
 void repeat(int times, std::function<void(int)> act) {
     for (int i = 0; i < times; ++i) {
         act(i);
@@ -9,17 +12,19 @@ void repeat(int times, std::function<void(int)> act) {
 }
 
 struct Hub {
-    void on_action(std::function<void()> handler) {
-        handlers.push_back(handler);
+    template<typename F>
+    void on_action(F&& handler) {
+        handlers.emplace_back(std::forward<F>(handler));
     }
 
     void action_performed() {
-        for (auto& handler: handlers) {
+        for (const auto& handler: handlers) {
             handler();
         }
     }
 
 private:
+    // std::vector<void(*)()> handlers;
     std::vector<std::function<void()>> handlers;
 };
 
