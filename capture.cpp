@@ -5,10 +5,10 @@
 #include <memory>
 #include <vector>
 
-// template<typename F>
-// void repeat(int times, F&& act) {
 // void repeat(int times, void(*act)(int)) {
-void repeat(int times, std::function<void(int)> act) {
+// void repeat(int times, std::function<void(int)> act) {
+template<typename F>
+void repeat(int times, F&& act) {
     for (int i = 0; i < times; ++i) {
         act(i);
     }
