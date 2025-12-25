@@ -1,3 +1,5 @@
+// g++ -fsanitize=address -fsanitize=leak -o capture capture.cpp && ./capture
+
 #include <functional>
 #include <iostream>
 #include <memory>

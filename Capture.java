@@ -5,7 +5,6 @@ void main() {
         sum[0] += i;
     });
     IO.println("sum: " + sum[0]);
-
     // Gather
     var hub = new Hub();
     initHub(hub);
