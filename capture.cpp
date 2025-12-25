@@ -52,6 +52,7 @@ int main() {
         sum += i;
     });
     std::cout << "sum: " << sum << "\n";
+
     // Gather
     Hub hub;
     init_hub(hub);
