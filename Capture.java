@@ -19,10 +19,12 @@ void repeat(int times, IntConsumer act) {
 }
 
 void initHub(Hub hub) {
+    var items = new ArrayList<Integer>();
     for (int i = 0; i < 3; ++i) {
         int i2 = i;
         hub.onAction(() -> {
-            IO.println("i: " + i2);
+            items.add(i2);
+            IO.println("items: " + items);
         });
     }
 }

@@ -1,5 +1,6 @@
 #include <functional>
 #include <iostream>
+#include <memory>
 #include <vector>
 
 // template<typename F>
@@ -29,9 +30,15 @@ private:
 };
 
 void init_hub(Hub& hub) {
+    auto items = std::make_shared<std::vector<int>>();
     for (int i = 0; i < 3; ++i) {
-        hub.on_action([i](){
-            std::cout << "i: " << i << "\n";
+        hub.on_action([items, i](){
+            items->push_back(i);
+            std::cout << "items:";
+            for (int i : *items) {
+                std::cout << " " << i;
+            }
+            std::cout << "\n";
         });
     }
 }
