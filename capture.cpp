@@ -5,15 +5,6 @@
 #include <memory>
 #include <vector>
 
-// void repeat(int times, void(*act)(int)) {
-// void repeat(int times, std::function<void(int)> act) {
-template<typename F>
-void repeat(int times, F&& act) {
-    for (int i = 0; i < times; ++i) {
-        act(i);
-    }
-}
-
 struct Hub {
     template<typename F>
     void on_action(F&& handler) {
@@ -42,6 +33,15 @@ void init_hub(Hub& hub) {
             }
             std::cout << "\n";
         });
+    }
+}
+
+// void repeat(int times, void(*act)(int)) {
+// void repeat(int times, std::function<void(int)> act) {
+template<typename F>
+void repeat(int times, F&& act) {
+    for (int i = 0; i < times; ++i) {
+        act(i);
     }
 }
 

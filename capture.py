@@ -18,18 +18,6 @@ def main():
     hub.action_performed()
 
 
-class Hub:
-    def __init__(self):
-        self.handlers: list[Callable[[], None]] = []
-
-    def on_action(self, handler: Callable[[], None]) -> None:
-        self.handlers.append(handler)
-
-    def action_performed(self) -> None:
-        for handler in self.handlers:
-            handler()
-
-
 def repeat(times: int, act: Callable[[int], None]) -> None:
     for i in range(times):
         act(i)
@@ -45,6 +33,18 @@ def init_hub(hub: Hub) -> None:
             print(f"items: {items}")
 
         hub.on_action(handler)
+
+
+class Hub:
+    def __init__(self):
+        self.handlers: list[Callable[[], None]] = []
+
+    def on_action(self, handler: Callable[[], None]) -> None:
+        self.handlers.append(handler)
+
+    def action_performed(self) -> None:
+        for handler in self.handlers:
+            handler()
 
 
 main()

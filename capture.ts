@@ -18,6 +18,16 @@ function repeat(times: number, act: (i: number) => void) {
   }
 }
 
+function initHub(hub: Hub) {
+  const items: number[] = [];
+  for (let i = 0; i < 3; i++) {
+    hub.onAction(() => {
+      items.push(i);
+      console.log("items:", items);
+    });
+  }
+}
+
 class Hub {
   private handlers: (() => void)[] = [];
 
@@ -29,16 +39,6 @@ class Hub {
     for (const handler of this.handlers) {
       handler();
     }
-  }
-}
-
-function initHub(hub: Hub) {
-  const items: number[] = [];
-  for (let i = 0; i < 3; i++) {
-    hub.onAction(() => {
-      items.push(i);
-      console.log("items:", items);
-    });
   }
 }
 
