@@ -36,7 +36,9 @@ class Hub {
     }
 
     fun actionPerformed() {
-        handlers.forEach { it() }
+        for (handler in handlers) {
+            handler()
+        }
     }
 }
 
