@@ -35,7 +35,10 @@ class Hub {
     }
 
     public void actionPerformed() {
-        handlers.forEach(Runnable::run);
+        // handlers.forEach(Runnable::run);
+        for (var handler : handlers) {
+            handler.run();
+        }
     }
 
     List<Runnable> handlers = new ArrayList<>();

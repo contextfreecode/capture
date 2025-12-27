@@ -15,6 +15,7 @@ main :: proc() {
 	hub: Hub
 	hub_init(&hub)
 	defer hub_destroy(&hub)
+	defer free_all(context.temp_allocator)
 	gather_handlers(&hub)
 	hub_action_performed(&hub)
 }
@@ -27,30 +28,18 @@ repeat :: proc(times: int, data: ^$T, act: proc(data: ^T, i: int)) {
 
 Items_Capture :: struct {
 	items:     ^[dynamic]int,
-	ref_count: ^int,
 	i:         int,
 }
 
 gather_handlers :: proc(hub: ^Hub) {
-	items := new([dynamic]int)
-	ref_count := new(int)
-	for i in 0 ..< 3 {
-		capture := new(Items_Capture)
+	items := new([dynamic]int, context.temp_allocator)
+	items^ = make([dynamic]int, 0, 3, context.temp_allocator)
+	for i in 0 ..< cap(items) {
+		capture := new(Items_Capture, context.temp_allocator)
 		capture.items = items
 		capture.i = i
-		capture.ref_count = ref_count
-		ref_count^ += 1
 		handler := Handler(Items_Capture) {
 			data = capture,
-			destroy = proc(data: ^Items_Capture) {
-				data.ref_count^ -= 1
-				if data.ref_count^ == 0 {
-					delete(data.items^)
-					free(data.items)
-					free(data.ref_count)
-				}
-				free(data)
-			},
 			procedure = proc(data: ^Items_Capture) {
 				append(data.items, data.i)
 				fmt.printf("items: %v\n", data.items^)
@@ -62,7 +51,6 @@ gather_handlers :: proc(hub: ^Hub) {
 
 Handler :: struct($Data: typeid) {
 	data:      ^Data,
-	destroy:   proc(data: ^Data),
 	procedure: proc(data: ^Data),
 }
 
@@ -75,18 +63,12 @@ hub_init :: proc(hub: ^Hub) {
 }
 
 hub_destroy :: proc(hub: ^Hub) {
-	for handler in hub.handlers {
-		if handler.destroy != nil {
-			handler.destroy(handler.data)
-		}
-	}
 	delete(hub.handlers)
 }
 
 hub_on_action :: proc(hub: ^Hub, handler: Handler($T)) {
 	handler_raw := Handler(rawptr) {
 		data      = auto_cast handler.data,
-		destroy   = auto_cast handler.destroy,
 		procedure = auto_cast handler.procedure,
 	}
 	append(&hub.handlers, handler_raw)
