@@ -12,7 +12,7 @@ func main() {
 
 	// Gather
 	hub := &Hub{}
-	initHub(hub)
+	gatherHandlers(hub)
 	hub.ActionPerformed()
 }
 
@@ -23,7 +23,7 @@ func repeat(times int, act func(int)) {
 	}
 }
 
-func initHub(hub *Hub) {
+func gatherHandlers(hub *Hub) {
 	items := []int{}
 	// for i := range 3 {
 	for i := 0; i < 3; i++ {

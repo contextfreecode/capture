@@ -11,7 +11,7 @@ fn main() {
 
     // Gather
     let mut hub = Hub::new();
-    init_hub(&mut hub);
+    gather_handlers(&mut hub);
     hub.action_performed();
 }
 
@@ -24,7 +24,7 @@ where
     }
 }
 
-fn init_hub(hub: &mut Hub) {
+fn gather_handlers(hub: &mut Hub) {
     let items = Rc::new(RefCell::new(Vec::new()));
     // let mut items = Vec::new();
     for i in 0..3 {

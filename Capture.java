@@ -8,7 +8,7 @@ void main() {
 
     // Gather
     var hub = new Hub();
-    initHub(hub);
+    gatherHandlers(hub);
     hub.actionPerformed();
 }
 
@@ -18,7 +18,7 @@ void repeat(int times, IntConsumer act) {
     }
 }
 
-void initHub(Hub hub) {
+void gatherHandlers(Hub hub) {
     var items = new ArrayList<Integer>();
     for (int i = 0; i < 3; ++i) {
         int i2 = i;

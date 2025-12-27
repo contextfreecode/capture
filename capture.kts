@@ -8,7 +8,7 @@ fun main() {
 
     // Gather
     val hub = Hub()
-    initHub(hub)
+    gatherHandlers(hub)
     hub.actionPerformed()
 }
 
@@ -18,7 +18,7 @@ fun repeat(times: Int, act: (Int) -> Unit) {
     }
 }
 
-fun initHub(hub: Hub) {
+fun gatherHandlers(hub: Hub) {
     val items = mutableListOf<Int>()
     for (i in 0 until 3) {
         hub.onAction {

@@ -8,7 +8,7 @@ function main() {
 
   // Gather
   const hub = new Hub();
-  initHub(hub);
+  gatherHandlers(hub);
   hub.actionPerformed();
 }
 
@@ -18,7 +18,7 @@ function repeat(times: number, act: (i: number) => void) {
   }
 }
 
-function initHub(hub: Hub) {
+function gatherHandlers(hub: Hub) {
   const items: number[] = [];
   for (let i = 0; i < 3; i++) {
     hub.onAction(() => {

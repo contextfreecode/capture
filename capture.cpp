@@ -22,7 +22,7 @@ private:
     std::vector<std::function<void()>> handlers;
 };
 
-void init_hub(Hub& hub) {
+void gather_handlers(Hub& hub) {
     auto items = std::make_shared<std::vector<int>>();
     for (int i = 0; i < 3; ++i) {
         hub.on_action([items, i](){
@@ -55,6 +55,6 @@ int main() {
 
     // Gather
     Hub hub;
-    init_hub(hub);
+    gather_handlers(hub);
     hub.action_performed();
 }
