@@ -12,7 +12,7 @@ fun main() {
     hub.actionPerformed()
 }
 
-fun repeat(times: Int, act: (Int) -> Unit) {
+inline fun repeat(times: Int, act: (Int) -> Unit) {
     for (i in 0 until times) {
         act(i)
     }
@@ -31,6 +31,7 @@ fun gatherHandlers(hub: Hub) {
 class Hub {
     private val handlers = mutableListOf<() -> Unit>()
 
+    // inline fun onAction(noinline handler: () -> Unit) {
     fun onAction(handler: () -> Unit) {
         handlers.add(handler)
     }
