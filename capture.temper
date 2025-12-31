@@ -4,7 +4,7 @@ test("main") {
   repeat(3) { i =>
     sum += i;
   }
-  assert(sum == 3)
+  assert(sum == 3);
 
   // Gather
   let hub = new Hub();
