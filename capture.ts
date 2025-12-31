@@ -20,6 +20,7 @@ function repeat(times: number, act: (i: number) => void) {
 
 function gatherHandlers(hub: Hub) {
   const items: number[] = [];
+  // let i = 0;
   for (let i = 0; i < 3; i++) {
     hub.onAction(() => {
       items.push(i);
