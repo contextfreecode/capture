@@ -26,11 +26,11 @@ let repeat(times: Int, act: RepeatActor): Void {
 
 let gatherHandlers(hub: Hub): ListBuilder<Int> {
   let items = new ListBuilder<Int>();
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 3; ++i) {
     let i = i;
     hub.onAction {
       items.add(i);
-      // console.log("items:", items);
+      // console.log("items: ${items.join(" ") { i => i.toString() }}");
     }
   }
   items
