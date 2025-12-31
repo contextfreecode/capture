@@ -1,0 +1,53 @@
+test("main") {
+  // Repeat
+  var sum = 0;
+  repeat(3) { i =>
+    sum += i;
+  }
+  assert(sum == 3)
+
+  // Gather
+  let hub = new Hub();
+  let items = gatherHandlers(hub);
+  hub.actionPerformed();
+  assert(items.length == 3);
+  for (var i = 0; i < items.length; ++i) {
+    assert(items[i] == i);
+  }
+}
+
+@fun interface RepeatActor(i: Int): Void;
+
+let repeat(times: Int, act: RepeatActor): Void {
+  for (var i = 0; i < times; ++i) {
+    act(i);
+  }
+}
+
+let gatherHandlers(hub: Hub): ListBuilder<Int> {
+  let items = new ListBuilder<Int>();
+  for (var i = 0; i < 3; i++) {
+    let i = i;
+    hub.onAction {
+      items.add(i);
+      // console.log("items:", items);
+    }
+  }
+  items
+}
+
+@fun interface Handler(): Void;
+
+class Hub {
+  private handlers: ListBuilder<Handler> = new ListBuilder();
+
+  public onAction(handler: Handler): Void {
+    handlers.add(handler);
+  }
+
+  public actionPerformed(): Void {
+    for (var i = 0; i < handlers.length; ++i) {
+      handlers[i]();
+    }
+  }
+}

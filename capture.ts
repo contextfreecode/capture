@@ -13,7 +13,7 @@ function main() {
 }
 
 function repeat(times: number, act: (i: number) => void) {
-  for (let i = 0; i < times; i++) {
+  for (let i = 0; i < times; ++i) {
     act(i);
   }
 }
