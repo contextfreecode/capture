@@ -30,7 +30,7 @@ let gatherHandlers(hub: Hub): ListBuilder<Int> {
     let i = i;
     hub.onAction {
       items.add(i);
-      // console.log("items: ${items.join(" ") { i => i.toString() }}");
+      // console.log("items: ${items.join(" ") { i => "${i}" }}");
     }
   }
   items

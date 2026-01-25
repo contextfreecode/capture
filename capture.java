@@ -1,9 +1,12 @@
 void main() {
     // Repeat
+    // int sum = 0;
     int[] sum = {0};
     repeat(3, i -> {
+        // sum += 1;
         sum[0] += i;
     });
+    // IO.println("sum: " + sum);
     IO.println("sum: " + sum[0]);
 
     // Gather
@@ -23,6 +26,7 @@ void gatherHandlers(Hub hub) {
     for (int i = 0; i < 3; ++i) {
         int i2 = i;
         hub.onAction(() -> {
+            // items.add(i);
             items.add(i2);
             IO.println("items: " + items);
         });

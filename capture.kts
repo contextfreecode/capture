@@ -31,7 +31,7 @@ fun gatherHandlers(hub: Hub) {
 class Hub {
     private val handlers = mutableListOf<() -> Unit>()
 
-    // inline fun onAction(noinline handler: () -> Unit) {
+    // inline fun onAction(handler: () -> Unit) {
     fun onAction(handler: () -> Unit) {
         handlers.add(handler)
     }

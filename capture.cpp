@@ -23,11 +23,14 @@ private:
 };
 
 void gather_handlers(Hub& hub) {
+    // auto items = std::vector<int>();
     auto items = std::make_shared<std::vector<int>>();
     for (int i = 0; i < 3; ++i) {
         hub.on_action([items, i](){
+            // items.push_back(i);
             items->push_back(i);
             std::cout << "items:";
+            // for (int i : items) {
             for (int i : *items) {
                 std::cout << " " << i;
             }
