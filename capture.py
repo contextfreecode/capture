@@ -23,7 +23,7 @@ def repeat(times: int, act: Callable[[int], None]) -> None:
         act(i)
 
 
-def gather_handlers(hub: Hub) -> None:  # noqa: F821
+def gather_handlers(hub: Hub) -> None:
     items: list[int] = []
     for i in range(3):
         # def handler():
