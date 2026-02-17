@@ -5,8 +5,7 @@ import "core:fmt"
 main :: proc() {
 	// Repeat
 	sum: int = 0
-	repeat(3, &sum, proc(data: ^int, i: int) {
-		sum := (^int)(data)
+	repeat(3, &sum, proc(sum: ^int, i: int) {
 		sum^ += i
 	})
 	fmt.printf("sum: %v\n", sum)
